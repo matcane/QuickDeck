@@ -1,0 +1,28 @@
+.auth-form {
+    width: 40vw;
+    height: 40vh;
+}
+
+.auth-form-label {
+    font-size: 3rem;
+}
+  
+.auth-form-input {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+  
+.auth-form-button {
+    border-radius: 8px;
+    border: 1px solid transparent;
+    margin-top: 2em;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    background-color: #1a1a1a;
+    cursor: pointer;
+    transition: border-color 0.25s;
+}
