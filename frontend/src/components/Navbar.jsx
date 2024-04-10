@@ -13,12 +13,11 @@ function Navbar() {
     return (
         <div className="sidenav">
             <h1>QuickDeck</h1>
-            <a>Dashboard</a>
-            <a>Decks</a>
+            <a onClick={() => {window.localStorage.setItem("view", "Dashboard"); window.location.reload(false)}}>Dashboard</a>
+            <a onClick={() => {window.localStorage.setItem("view", "Decks"); window.location.reload(false)}}>Decks</a>
             <div>
                 <h2 onClick={e => Logout(e)}>Logout</h2>
             </div>
-            
         </div>
     )
 }

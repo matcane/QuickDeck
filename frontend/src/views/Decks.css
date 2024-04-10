@@ -1,0 +1,55 @@
+.decks {
+    display: flex;
+    width: 100%;
+    margin: 0;
+    padding: 10px;
+    flex-direction: column;
+    overflow: auto;
+}
+
+.decks-item {
+    display: flex;
+    flex-direction: row;
+    border: 2px solid black;
+    border-radius: 12px;
+    height: 5vh;
+    padding: 4rem;
+    margin: 1rem;
+}
+
+.decks-item:hover {
+    border: 3px solid black;
+}
+
+.decks-item-star {
+    width: 5%;
+}
+
+.decks-item-star:hover {
+    cursor: pointer;
+}
+
+.decks-item-title {
+    width: 55%;
+}
+
+.decks-item-edit {
+    width: 20%;
+}
+
+.decks-item-edit:hover {
+    cursor: pointer;
+}
+
+.decks-item-open {
+    width: 20%;
+}
+
+.decks-item-open:hover {
+    cursor: pointer;
+}
+
+.decks-font {
+    font-size: 2rem;
+    overflow-x: hidden;
+}
