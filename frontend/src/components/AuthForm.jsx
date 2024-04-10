@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { sign_in, sign_up } from "../services/auth";
+import { jwtDecode } from "jwt-decode";
 import api from '../services/api';
 import './AuthForm.css'
 
@@ -21,6 +22,7 @@ function AuthForm ({type}) {
             window.localStorage.setItem('access_token', response.access);
             window.localStorage.setItem('refresh_token', response.refresh);
             window.localStorage.setItem("isLogged", true);
+            window.localStorage.setItem("username", jwtDecode(response.access).username);
             clear();
         }
         if (type === "sign up") {
