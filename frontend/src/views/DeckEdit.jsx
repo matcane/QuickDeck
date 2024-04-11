@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { deck_detail } from '../services/deck';
-import { flashcard_add } from '../services/flashcard';
+import { flashcard_add, flashcard_delete } from '../services/flashcard';
 import './DeckEdit.css'
 
 
@@ -36,6 +36,18 @@ function DeckEdit() {
         }
     }
 
+    const handleDeleteFlashcard = async (e, flashcard_id) => {
+        e.preventDefault();
+        try{
+            const response = await flashcard_delete(deck_id, flashcard_id);
+            setFlashcards(prevFlashcards => {
+                return prevFlashcards.filter(flashcard => flashcard.id !== flashcard_id);
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <div className="deck-edit">
             <div>
@@ -62,7 +74,7 @@ function DeckEdit() {
                             <p className='flashcard-item-text'>{flashcard.back}</p>
                             </div>
                             <button className='flashcard-item-button' type='button'>Edit</button>
-                            <button className='flashcard-item-button' type='button'>Delete</button>
+                            <button className='flashcard-item-button' type='button' onClick={(e) => handleDeleteFlashcard(e, flashcard.id)}>Delete</button>
                         </div>
                     </div>
                 </div>

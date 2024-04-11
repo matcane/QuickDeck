@@ -8,3 +8,12 @@ export const flashcard_add = async (deck_id, front, back) => {
         console.log(error);
     }
 }
+
+export const flashcard_delete = async (deck_id, flashcard_id) => {
+    try{
+        const response = await api.delete("/api/deck/" + deck_id + "/flashcard_delete/" + flashcard_id + "/");
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+}
