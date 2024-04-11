@@ -19,6 +19,15 @@ export const deck_detail = async (deck_id) => {
     }
 }
 
+export const deck_add = async (title) => {
+    try {
+        const response = await api.post("/api/deck_create/", {title: title});
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 export const deck_delete = async (deck_id) => {
     try {
         const response = await api.delete("/api/deck_delete/" + deck_id + "/")
