@@ -8,3 +8,13 @@ export const deck_list = async () => {
         console.log(error);
     }
 }
+
+export const deck_detail = async (deck_id) => {
+    try {
+        console.log(deck_id);
+        const response = await api.get("/api/deck/" + deck_id + "/")
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+}

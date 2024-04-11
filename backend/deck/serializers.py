@@ -13,11 +13,17 @@ class UserSerializer(serializers.Serializer):
 
 class DeckModelSerializer(serializers.ModelSerializer):
     owner = serializers.StringRelatedField()
+    flashcards = serializers.SerializerMethodField()
 
     class Meta:
         model = Deck
-        fields = ['id', 'title', 'owner', 'created', 'description']
+        fields = ['id', 'title', 'owner', 'created', 'description', 'flashcards']
         id = serializers.ReadOnlyField()
+
+    def get_flashcards(self, obj):
+        flashcards = obj.flashcards.all()
+        serialized_cards = FlashCardModelSerializer(flashcards, many=True).data
+        return serialized_cards
 
 
 class FlashCardModelSerializer(serializers.ModelSerializer):

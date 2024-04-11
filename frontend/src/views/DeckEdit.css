@@ -1,0 +1,71 @@
+.deck-edit {
+    display: flex;
+    width: 100%;
+    margin: 0;
+    padding: 10px;
+    flex-direction: column;
+}
+
+.flashcards {
+    display: flex;
+    width: 100%;
+    margin: 0;
+    padding: 10px;
+    flex-direction: column;
+    overflow: auto;
+}
+
+.flashcard-item-container {
+    display: flex;
+    flex-direction: row;
+    border: 2px solid black;
+    border-radius: 12px;
+    height: auto;
+    padding: 4rem;
+    margin: 1rem;
+}
+
+.flashcard-item {
+    width: 100%;
+    height: 100%;
+}
+
+.flashcard-form {
+    display: flex;
+}
+
+.flashcard-content {
+    display: flex;
+}
+
+.flashcard-item-text {
+    max-width: 800px;
+    margin: 0 0 0 0;
+}
+
+.flashcard-item-input {
+    width: 100%;
+    font-size: 2rem;
+    margin: 5px;
+    box-sizing: border-box;
+}
+
+.flashcard-item-data {
+    width: 100%;
+    font-size: 2rem;
+    margin: 5px 15px 5px 5px;
+    box-sizing: border-box;
+    overflow-x: auto;
+}
+
+.flashcard-item-button {
+    border-radius: 8px;
+    border: 1px solid transparent;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    background-color: #1a1a1a;
+    cursor: pointer;
+    transition: border-color 0.25s;
+}
