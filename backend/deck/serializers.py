@@ -29,5 +29,5 @@ class DeckModelSerializer(serializers.ModelSerializer):
 class FlashCardModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = FlashCard
-        fields = ['id', 'deck', 'front', 'back']
+        fields = ['id', 'front', 'back']
         id = serializers.ReadOnlyField()

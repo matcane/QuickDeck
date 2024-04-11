@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react';
 import { deck_detail } from '../services/deck';
+import { flashcard_add } from '../services/flashcard';
 import './DeckEdit.css'
 
 
 function DeckEdit() {
     let deck_id = window.localStorage.getItem("deck_id");
     const [flashcards, setFlashcards] = useState([]);
+    const [frontSideFlashcard, setFrontSideFlashcard] = useState("");
+    const [backSideFlashcard, setBackSideFlashcard] = useState("");
 
     useEffect(() => {
         fetchDeckData();
@@ -21,6 +24,18 @@ function DeckEdit() {
         }
     };
 
+    const handleAddFlashcard = async (e) => {
+        e.preventDefault();
+        try{
+            const response = await flashcard_add(deck_id, frontSideFlashcard, backSideFlashcard);
+            setFlashcards([...flashcards, response]);
+            setFrontSideFlashcard("");
+            setBackSideFlashcard("");
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <div className="deck-edit">
             <div>
@@ -29,10 +44,10 @@ function DeckEdit() {
             <div className='flashcards'>
                 <div className='flashcard-item-container'>
                     <div className='flashcard-item'>
-                        <form className='flashcard-form' onSubmit={(e) => console.log(e)}>
-                            <input className='flashcard-item-input' type="text" placeholder='Frontside'/>
-                            <input className='flashcard-item-input' type="text" placeholder='Backside'/>
-                            <button className='flashcard-item-button' type='button'>Add</button>
+                        <form className='flashcard-form' onSubmit={(e) => handleAddFlashcard(e)}>
+                            <input className='flashcard-item-input' type="text" placeholder='Frontside' required value={frontSideFlashcard} onChange={e => setFrontSideFlashcard(e.target.value)}/>
+                            <input className='flashcard-item-input' type="text" placeholder='Backside' required value={backSideFlashcard} onChange={e => setBackSideFlashcard(e.target.value)}/>
+                            <button className='flashcard-item-button' type='submit'>Add</button>
                         </form>
                     </div>
                 </div>

@@ -131,10 +131,15 @@ def flashcard_detail(request, deck_id, flashcard_id):
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def flashcard_create(request, deck_id):
+    try:
+        deck = Deck.objects.get(id=deck_id)
+    except:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
     if request.method == 'POST':
         serializer = FlashCardModelSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save(deck=deck_id)
+            serializer.save(deck=deck)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
