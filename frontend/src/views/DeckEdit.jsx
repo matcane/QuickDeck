@@ -10,6 +10,8 @@ function DeckEdit() {
     let deck_id = window.localStorage.getItem("deck_id");
     let deck_title = window.localStorage.getItem("deck_title");
     const [flashcards, setFlashcards] = useState([]);
+    const [currentFlashcardEditIndex, setCurrentFlashcardEditIndex] = useState();
+    const [showFlashcardEdit, setShowFlashcardEdit] = useState(false);
 
     useEffect(() => {
         fetchDeckData();
@@ -25,8 +27,21 @@ function DeckEdit() {
         }
     };
 
-    const updateFlashcards = (flashcard) => {
+    const addFlashcards = (flashcard) => {
         setFlashcards([...flashcards, flashcard]);
+    };
+
+    const updateFlashcards = (flashcard_edited) => {
+        setFlashcards(prevFlashcards => {
+            return prevFlashcards.map(flashcard => {
+                if (flashcard.id === flashcard_edited.id) {
+                    return { ...flashcard, front: flashcard_edited.front, back: flashcard_edited.back};
+                } else {
+                    return flashcard;
+                }
+            });
+        });
+        setShowFlashcardEdit(!showFlashcardEdit);
     };
 
     const handleDeleteFlashcard = async (e, flashcard_id) => {
@@ -39,6 +54,11 @@ function DeckEdit() {
         } catch (error) {
             console.log(error);
         }
+    }
+
+    const handleEditFlashcard = async (index) => {
+        setShowFlashcardEdit(true);
+        setCurrentFlashcardEditIndex(index);
     }
 
     const handleDeleteDeck = async () => {
@@ -61,12 +81,13 @@ function DeckEdit() {
             <div className='flashcards'>
                 <div className='flashcard-item-container'>
                     <div className='flashcard-item'>
-                        <FlashcardForm update={updateFlashcards}/>
+                        <FlashcardForm type='create' update={addFlashcards} data={""}/>
                     </div>
                 </div>
                 {flashcards.map((flashcard, index) => (
                 <div className='flashcard-item-container' key={index}>
                     <div className='flashcard-item'>
+                        {showFlashcardEdit && currentFlashcardEditIndex === index ? <FlashcardForm type='edit' update={updateFlashcards} data={flashcard} /> :
                         <div className='flashcard-content'>
                             <div className='flashcard-item-data'>
                             <p className='flashcard-item-text'>{flashcard.front}</p>
@@ -74,9 +95,10 @@ function DeckEdit() {
                             <div className='flashcard-item-data'>
                             <p className='flashcard-item-text'>{flashcard.back}</p>
                             </div>
-                            <button className='deck-edit-button' type='button'>Edit</button>
+                            <button className='deck-edit-button' type='button' onClick={() => handleEditFlashcard(index)}>Edit</button>
                             <button className='deck-edit-button' type='button' onClick={(e) => handleDeleteFlashcard(e, flashcard.id)}>Delete</button>
                         </div>
+                        }
                     </div>
                 </div>
                 ))}

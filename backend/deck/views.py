@@ -157,7 +157,7 @@ def flashcard_update(request, deck_id, flashcard_id):
     if request.method == 'PUT':
         serializer = FlashCardModelSerializer(flashcard, data=request.data, partial=True)
         if serializer.is_valid():
-            serializer.save(deck=deck_id)
+            serializer.save(deck=deck)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 

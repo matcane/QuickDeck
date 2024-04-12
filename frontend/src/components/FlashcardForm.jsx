@@ -1,14 +1,23 @@
 import { useState } from 'react';
-import { flashcard_add } from '../services/flashcard';
+import { flashcard_add, flashcard_update } from '../services/flashcard';
 import './FlashcardForm.css'
 
-function FlashcardForm ({update}) {
+function FlashcardForm ({type, update, data}) {
     let deck_id = window.localStorage.getItem("deck_id");
-    const [frontSideFlashcard, setFrontSideFlashcard] = useState("");
-    const [backSideFlashcard, setBackSideFlashcard] = useState("");
+    const [frontSideFlashcard, setFrontSideFlashcard] = useState(data.front || "");
+    const [backSideFlashcard, setBackSideFlashcard] = useState(data.back || "");
 
-    const handleAddFlashcard = async (e) => {
+    const handleFlashcard = async (e) => {
         e.preventDefault();
+        if(type === "create"){
+            AddFlashcard();
+        }
+        else if(type === "edit"){
+            UpdateFlashcard();
+        }
+    }
+
+    const AddFlashcard = async () => {
         try{
             const response = await flashcard_add(deck_id, frontSideFlashcard, backSideFlashcard);
             update(response);
@@ -19,11 +28,22 @@ function FlashcardForm ({update}) {
         }
     }
 
+    const UpdateFlashcard = async () => {
+        try{
+            const response = await flashcard_update(deck_id, data.id, frontSideFlashcard, backSideFlashcard);
+            update(response);
+            setFrontSideFlashcard("");
+            setBackSideFlashcard("");
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
-        <form className='flashcard-form' onSubmit={(e) => handleAddFlashcard(e)}>
-            <input className='flashcard-item-input' type="text" placeholder='Frontside' required value={frontSideFlashcard} onChange={e => setFrontSideFlashcard(e.target.value)}/>
-            <input className='flashcard-item-input' type="text" placeholder='Backside' required value={backSideFlashcard} onChange={e => setBackSideFlashcard(e.target.value)}/>
-            <button type='submit'>Add</button>
+        <form className='flashcard-form' onSubmit={(e) => handleFlashcard(e)}>
+            <input className='flashcard-item-input' type="text" placeholder="Frontside" required value={frontSideFlashcard} onChange={e => setFrontSideFlashcard(e.target.value)}/>
+            <input className='flashcard-item-input' type="text" placeholder="Backside" required value={backSideFlashcard} onChange={e => setBackSideFlashcard(e.target.value)}/>
+            <button type='submit'>{type === "create" ? "Add" : "Save"}</button>
         </form>
     )
 }
