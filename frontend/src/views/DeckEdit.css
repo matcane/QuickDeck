@@ -50,10 +50,6 @@
     height: 100%;
 }
 
-.flashcard-form {
-    display: flex;
-}
-
 .flashcard-content {
     display: flex;
 }
@@ -61,13 +57,6 @@
 .flashcard-item-text {
     max-width: 800px;
     margin: 0 0 0 0;
-}
-
-.flashcard-item-input {
-    width: 100%;
-    font-size: 2rem;
-    margin: 5px;
-    box-sizing: border-box;
 }
 
 .flashcard-item-data {

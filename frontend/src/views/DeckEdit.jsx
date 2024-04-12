@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { deck_detail } from '../services/deck';
 import { flashcard_add, flashcard_delete } from '../services/flashcard';
 import { deck_delete } from '../services/deck';
+import FlashcardForm from '../components/FlashcardForm';
 import './DeckEdit.css'
 
 
@@ -9,8 +10,6 @@ function DeckEdit() {
     let deck_id = window.localStorage.getItem("deck_id");
     let deck_title = window.localStorage.getItem("deck_title");
     const [flashcards, setFlashcards] = useState([]);
-    const [frontSideFlashcard, setFrontSideFlashcard] = useState("");
-    const [backSideFlashcard, setBackSideFlashcard] = useState("");
 
     useEffect(() => {
         fetchDeckData();
@@ -26,17 +25,9 @@ function DeckEdit() {
         }
     };
 
-    const handleAddFlashcard = async (e) => {
-        e.preventDefault();
-        try{
-            const response = await flashcard_add(deck_id, frontSideFlashcard, backSideFlashcard);
-            setFlashcards([...flashcards, response]);
-            setFrontSideFlashcard("");
-            setBackSideFlashcard("");
-        } catch (error) {
-            console.log(error);
-        }
-    }
+    const updateFlashcards = (flashcard) => {
+        setFlashcards([...flashcards, flashcard]);
+    };
 
     const handleDeleteFlashcard = async (e, flashcard_id) => {
         e.preventDefault();
@@ -70,11 +61,7 @@ function DeckEdit() {
             <div className='flashcards'>
                 <div className='flashcard-item-container'>
                     <div className='flashcard-item'>
-                        <form className='flashcard-form' onSubmit={(e) => handleAddFlashcard(e)}>
-                            <input className='flashcard-item-input' type="text" placeholder='Frontside' required value={frontSideFlashcard} onChange={e => setFrontSideFlashcard(e.target.value)}/>
-                            <input className='flashcard-item-input' type="text" placeholder='Backside' required value={backSideFlashcard} onChange={e => setBackSideFlashcard(e.target.value)}/>
-                            <button className='deck-edit-button' type='submit'>Add</button>
-                        </form>
+                        <FlashcardForm update={updateFlashcards}/>
                     </div>
                 </div>
                 {flashcards.map((flashcard, index) => (
