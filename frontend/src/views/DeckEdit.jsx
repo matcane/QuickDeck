@@ -1,17 +1,17 @@
 import { useState, useEffect } from 'react';
-import { deck_detail } from '../services/deck';
-import { flashcard_add, flashcard_delete } from '../services/flashcard';
-import { deck_delete } from '../services/deck';
+import { deck_detail, deck_delete, deck_update} from '../services/deck';
+import { flashcard_delete } from '../services/flashcard';
 import FlashcardForm from '../components/FlashcardForm';
 import './DeckEdit.css'
 
 
 function DeckEdit() {
     let deck_id = window.localStorage.getItem("deck_id");
-    let deck_title = window.localStorage.getItem("deck_title");
+    const [deckTitle, setDeckTitle] = useState(window.localStorage.getItem("deck_title"));
     const [flashcards, setFlashcards] = useState([]);
     const [currentFlashcardEditIndex, setCurrentFlashcardEditIndex] = useState();
     const [showFlashcardEdit, setShowFlashcardEdit] = useState(false);
+    const [showDeckEdit, setShowDeckEdit] = useState(false);
 
     useEffect(() => {
         fetchDeckData();
@@ -26,6 +26,18 @@ function DeckEdit() {
             console.log(error);
         }
     };
+
+    const updateDeck = async () => {
+        try{
+            if (deckTitle !== window.localStorage.getItem("deck_title")){
+                const response = await deck_update(deck_id, deckTitle);
+                window.localStorage.setItem("deck_title", response.title);
+            }
+            setShowDeckEdit(false);
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     const addFlashcards = (flashcard) => {
         setFlashcards([...flashcards, flashcard]);
@@ -64,7 +76,7 @@ function DeckEdit() {
     const handleDeleteDeck = async () => {
         try{
             const response = await deck_delete(deck_id);
-            window.localStorage.setItem("view", "Decks"); 
+            window.localStorage.setItem("view", "Decks");
             window.location.reload(false);
         } catch (error) {
             console.log(error);
@@ -74,9 +86,19 @@ function DeckEdit() {
     return (
         <div className="deck-edit">
             <div className='deck-edit-header'>
-                <div className='deck-edit-header-title'><h1 className='deck-edit-tile'>{deck_title}</h1></div>
-                <div className='deck-edit-header-button'><button className='deck-edit-button' type='button'>Edit</button></div>
+                {showDeckEdit ?
+                <>
+                <div className='deck-edit-header-title'><h1 className='deck-edit-tile'><input autoFocus className='deck-title-input' type="text" required value={deckTitle} onChange={e => setDeckTitle(e.target.value)} /></h1></div>
+                <div className='deck-edit-header-button'><button className='deck-edit-button' type='button' onClick={() => updateDeck()}>Save</button></div>
                 <div className='deck-edit-header-button'><button className='deck-edit-button' type='button' onClick={() => handleDeleteDeck()}>Delete</button></div>
+                </>
+                :
+                <>
+                <div className='deck-edit-header-title'><h1 className='deck-edit-tile'>{deckTitle}</h1></div>
+                <div className='deck-edit-header-button'><button className='deck-edit-button' type='button' onClick={() => setShowDeckEdit(true)}>Edit</button></div>
+                <div className='deck-edit-header-button'><button className='deck-edit-button' type='button' onClick={() => handleDeleteDeck()}>Delete</button></div>
+                </>
+                }
             </div>
             <div className='flashcards'>
                 <div className='flashcard-item-container'>
