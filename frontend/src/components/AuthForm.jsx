@@ -41,6 +41,7 @@ function AuthForm ({type}) {
                     type="text" 
                     name="login" 
                     id="email-login" 
+                    autocomplete="off"
                     required value={username} 
                     onChange={e => setUsername(e.target.value)}
                 /> 
@@ -50,6 +51,7 @@ function AuthForm ({type}) {
                     type="password" 
                     name='passowrd' 
                     id="password-login" 
+                    autocomplete="off"
                     required value={password} 
                     onChange={e => setPassword(e.target.value)}
                 />

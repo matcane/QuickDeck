@@ -1,6 +1,6 @@
 .home {
     display: flex;
-    height: 90vh;
+    height: 100vh;
     padding: 2rem;
     box-sizing: border-box;
 }
