@@ -1,0 +1,31 @@
+.deck-study {
+    display: flex;
+    width: 100%;
+    margin: 0;
+    padding: 10px;
+    flex-direction: column;
+}
+
+.flashcard-view {
+    display: flex;
+    border: 2px solid black;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    margin: 1rem;
+    user-select: none;
+    cursor: pointer;
+}
+
+.flashcard-view:hover {
+    border: 2px solid white;
+}
+
+.flashcard-view-content {
+    height: 80%;
+}
+
+.flashcard-view-next {
+    height: 10%;
+}
+

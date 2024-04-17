@@ -26,6 +26,15 @@ function Decks() {
         window.location.reload(false);
     }
 
+    function studyDeck(deck) {
+        if (deck.flashcards.length !== 0) {
+            window.localStorage.setItem("deck_id", deck.id);
+            window.localStorage.setItem("deck_title", deck.title);
+            window.localStorage.setItem("view", "Deck-study");
+            window.location.reload(false);
+        }
+    }
+
     return (
         <div className="decks">
             {decks.map((deck, index) => (
@@ -33,7 +42,7 @@ function Decks() {
                     <div className="decks-item-star decks-font">☆</div>
                     <div className='decks-item-title decks-font'>{deck.title}</div>
                     <div className='decks-item-edit decks-font' onClick={() => editDeck(deck)}>Edit</div>
-                    <div className='decks-item-open decks-font'>Open</div>
+                    <div className='decks-item-open decks-font' onClick={() => studyDeck(deck)}>Study</div>
                     </div>
                 ))}
         </div>
