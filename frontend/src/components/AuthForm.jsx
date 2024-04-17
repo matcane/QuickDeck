@@ -35,7 +35,7 @@ function AuthForm ({type}) {
     return(
         <>
             <form className='auth-form' onSubmit={e => handleOnSubmit(e)}>
-                <label className='auth-form-label' htmlFor="email-login">Usernmame</label>
+                <label className='auth-form-label' htmlFor="email-login">Username</label>
                 <input 
                     className='auth-form-input' 
                     type="text" 
