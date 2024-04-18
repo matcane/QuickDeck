@@ -15,6 +15,10 @@ function AuthForm ({type}) {
 
     const handleOnSubmit = async (e) => {
         e.preventDefault();
+        if (type === "sign up") {
+            const response = await sign_up(username, password);
+            type = "sign in";
+        }
         if (type === "sign in") {
             const response = await sign_in(username, password);
             window.localStorage.clear();
@@ -23,10 +27,6 @@ function AuthForm ({type}) {
             window.localStorage.setItem("isLogged", true);
             window.localStorage.setItem("view", "Dashboard");
             window.localStorage.setItem("username", jwtDecode(response.access).username);
-            clear();
-        }
-        if (type === "sign up") {
-            const response = await sign_up(username, password);
             clear();
         }
       };
