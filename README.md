@@ -13,7 +13,7 @@ This application is created to enable users to create and manage decks of flashc
 - Use of JWT for user authentication and authorization
 
 ## Installation and Running
-1. Clone the repository: `git clone https://github.com/YOUR-USERNAME/your-project.git`
+1. Clone the repository: `git clone https://github.com/matcane/QuickDeck.git`
 2. Create a Python environment `python3 -m venv env`
 3. Activate the Python environment `source env/bin/activate`
 4. Navigate to the backend directory: `cd backend`
@@ -23,5 +23,11 @@ This application is created to enable users to create and manage decks of flashc
 8. Install the required JavaScript libraries: `npm install`
 9. Start the frontend development server: `npm start`
 10. The application will be available at: `http://localhost:5173/`
+
+## RoadMap
+- Forms validation
+- Alerts
+- Generated decks
+- ...
 
 ## Demo
