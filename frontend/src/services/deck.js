@@ -11,7 +11,6 @@ export const deck_list = async () => {
 
 export const deck_detail = async (deck_id) => {
     try {
-        console.log(deck_id);
         const response = await api.get("/api/deck/" + deck_id + "/")
         return response.data;
     } catch (error) {

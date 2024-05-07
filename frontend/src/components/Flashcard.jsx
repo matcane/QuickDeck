@@ -1,14 +1,16 @@
 import { useState } from 'react';
+import { Button } from "flowbite-react";
 import { flashcard_add, flashcard_update } from '../services/flashcard';
-import './FlashcardForm.css'
 
-function FlashcardForm ({type, update, data}) {
+export function Flashcard ({type, update, data}) {
     let deck_id = window.localStorage.getItem("deck_id");
     const [frontSideFlashcard, setFrontSideFlashcard] = useState(data.front || "");
     const [backSideFlashcard, setBackSideFlashcard] = useState(data.back || "");
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleFlashcard = async (e) => {
         e.preventDefault();
+        setIsLoading(true);
         if(type === "create"){
             AddFlashcard();
         }
@@ -23,6 +25,7 @@ function FlashcardForm ({type, update, data}) {
             update(response);
             setFrontSideFlashcard("");
             setBackSideFlashcard("");
+            setIsLoading(false);
         } catch (error) {
             console.log(error);
         }
@@ -34,18 +37,19 @@ function FlashcardForm ({type, update, data}) {
             update(response);
             setFrontSideFlashcard("");
             setBackSideFlashcard("");
+            setIsLoading(false);
         } catch (error) {
             console.log(error);
         }
     }
 
     return (
-        <form className='flashcard-form' onSubmit={(e) => handleFlashcard(e)}>
-            <input className='flashcard-item-input' type="text" placeholder="Frontside" required value={frontSideFlashcard} onChange={e => setFrontSideFlashcard(e.target.value)}/>
-            <input className='flashcard-item-input' type="text" placeholder="Backside" required value={backSideFlashcard} onChange={e => setBackSideFlashcard(e.target.value)}/>
-            <button type='submit'>{type === "create" ? "Add" : "Save"}</button>
+        <>
+        <form className='flex flex-col border-white rounded-lg md:flex-row' onSubmit={(e) => handleFlashcard(e)}>
+            <input maxLength={255} className='w-full text-2xl m-0 bg-transparent' type="text" color='transparent' placeholder="Frontside" required value={frontSideFlashcard} onChange={e => setFrontSideFlashcard(e.target.value)}/>
+            <input maxLength={255} className='w-full text-2xl m-0 bg-transparent' type="text" placeholder="Backside" required value={backSideFlashcard} onChange={e => setBackSideFlashcard(e.target.value)}/>
+            <Button isProcessing={isLoading} size="xl" type='submit' color="lightblue" className='w-full m-0 bg-blue-500 text-white rounded-lg hover:bg-blue-600 md:w-1/3'>{type === "create" ? "Add" : "Save"}</Button>
         </form>
+        </>
     )
 }
-
-export default FlashcardForm

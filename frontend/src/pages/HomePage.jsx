@@ -1,9 +1,8 @@
-import Navbar from "../components/Navbar";
 import Dashboard from "../views/Dashboard";
 import Decks from '../views/Decks';
 import DeckEdit from "../views/DeckEdit";
 import DeckStudy from "../views/DeckStudy";
-import './HomePage.css'
+import { SideBar } from "../components/SideBar";
 
 
 function HomePage () {
@@ -11,8 +10,8 @@ function HomePage () {
 
 
     return (
-        <div className="home">
-            <Navbar />
+        <div className="flex h-screen w-screen pt-10 border-box sm:p-4">
+            <SideBar />
             {view === 'Dashboard' ? <Dashboard /> : <></>}
             {view === 'Decks' ? <Decks /> : <></>}
             {view === 'Deck-edit' ? <DeckEdit /> : <></>}
