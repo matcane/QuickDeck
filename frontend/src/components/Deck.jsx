@@ -36,7 +36,7 @@ export function Deck(props) {
 
     return(
         <>
-            {edit && <input autoFocus className="w-3/4 text-2xl bg-transparent" required value={data} onChange={e => setData(e.target.value)}/>}
+            {edit && <input minLength={3} maxLength={50} autoFocus className="w-3/4 text-2xl bg-transparent" required value={data} onChange={e => setData(e.target.value)}/>}
             {!edit && <span className='w-3/4 text-2xl text-center truncate hover:bg-gray-600 hover:cursor-pointer' onClick={() => onClick()}>{data}</span>}
 
             <div className='flex w-full justify-center px-5'>

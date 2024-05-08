@@ -51,7 +51,7 @@ export function PopUp({mode}) {
             {mode === "Generate" && <>Enter your prompt to ChatGPT</>}
             </p>
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            <TextInput maxLength={50} sizing="lg" type="text" required value={deckTitle} onChange={handleInputChange}/>
+            <TextInput maxLength={50} minLength={3} sizing="lg" type="text" required value={deckTitle} onChange={handleInputChange}/>
             <Button isProcessing={isLoading} size="xl" onClick={handleAddDeck}>{mode}</Button>
             </div>
         </Drawer.Items>
