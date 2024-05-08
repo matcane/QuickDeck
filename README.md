@@ -2,17 +2,15 @@
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)![Django](https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white)![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![JWT](https://img.shields.io/badge/json%20web%20tokens-323330?style=for-the-badge&logo=json-web-tokens&logoColor=pink)
-
+![Tailwindcss](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
 ## Description
-This application is created to enable users to create and manage decks of flashcards. Flashcards can be used for learning new words, concepts, or any other information users wish to memorize. The project consists of a backend written in Python using the Django framework and Django REST Framework, and a frontend written in JavaScript using the React library. JWT (JSON Web Token) is used for user authentication.
+This application is created to enable users to create and manage decks of flashcards. Flashcards can be used for learning new words, concepts, or any other information users wish to memorize. The project consists of a backend written in Python using the Django framework and Django REST Framework, and a frontend written in JavaScript using the React library. JWT (JSON Web Token) is used for user authentication, while PostgreSQL serves as the database. Tailwind CSS and FlowBite React is employed for styling.
 
-## Features
-- User registration and login
-- Creation, editing, and deletion of flashcard decks
-- Adding, editing, and deleting flashcards from decks
-- Use of JWT for user authentication and authorization
+## Live Demo
+https://9fc8ae32-1dcf-4ec0-9455-0b1e61dd2881.e1-eu-north-azure.choreoapps.dev/
 
-## Installation and Running
+## Installation and Running Locally
 1. Clone the repository: `git clone https://github.com/matcane/QuickDeck.git`
 2. Create a Python environment `python3 -m venv env`
 3. Activate the Python environment `source env/bin/activate`
@@ -26,12 +24,9 @@ This application is created to enable users to create and manage decks of flashc
 11. Start the frontend development server: `npm start`
 12. The application will be available at: `http://localhost:5173/`
 
-## RoadMap
-- Forms validation
-- Alerts
-- Generated decks
-- ...
+## ToDo
+- [ ] Generated decks by GPT
 
 ## Demo
 
-[![QuickDeck Demo](http://img.youtube.com/vi/YpssYXzASfc/0.jpg)](http://www.youtube.com/watch?v=YpssYXzASfc "QuickDeck Demo")
+...
