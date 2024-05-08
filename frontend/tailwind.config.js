@@ -8,7 +8,11 @@ module.exports = {
     flowbite.content(),
   ],
   theme: {
-    extend: {},
+    extend: {
+      cursor: {
+        wait: 'default',
+      },
+    },
   },
   plugins: [
     flowbite.plugin(),

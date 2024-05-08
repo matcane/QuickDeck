@@ -24,15 +24,15 @@ export function SideBar() {
     <Sidebar className="hidden lg:flex">
       <Sidebar.Items className="flex flex-col justify-between h-full">
         <Sidebar.ItemGroup>
-          <Sidebar.Item icon={HiChartPie} onClick={() => {window.localStorage.setItem("view", "Dashboard"); window.location.reload(false)}}>
+          <Sidebar.Item className="cursor-pointer" icon={HiChartPie} onClick={() => {window.localStorage.setItem("view", "Dashboard"); window.location.reload(false)}}>
             Dashboard
           </Sidebar.Item>
-          <Sidebar.Item icon={HiViewBoards} onClick={() => {window.localStorage.setItem("view", "Decks"); window.location.reload(false)}}>
+          <Sidebar.Item className="cursor-pointer" icon={HiViewBoards} onClick={() => {window.localStorage.setItem("view", "Decks"); window.location.reload(false)}}>
             Decks
           </Sidebar.Item>
         </Sidebar.ItemGroup>
         <Sidebar.ItemGroup>
-          <Sidebar.Item icon={BiBuoy} onClick={e => Logout(e)}>
+          <Sidebar.Item className="cursor-pointer" icon={BiBuoy} onClick={e => Logout(e)}>
             Logout
           </Sidebar.Item>
         </Sidebar.ItemGroup>
@@ -50,15 +50,15 @@ export function SideBar() {
           <Sidebar className="[&>div]:bg-transparent [&>div]:p-0">
               <Sidebar.Items className="flex flex-col justify-betweenk h-full">
                 <Sidebar.ItemGroup>
-                  <Sidebar.Item icon={HiChartPie} onClick={() => {window.localStorage.setItem("view", "Dashboard"); window.location.reload(false)}}>
+                  <Sidebar.Item className="cursor-pointer" icon={HiChartPie} onClick={() => {window.localStorage.setItem("view", "Dashboard"); window.location.reload(false)}}>
                         Dashboard
                     </Sidebar.Item>
-                    <Sidebar.Item icon={HiViewBoards} onClick={() => {window.localStorage.setItem("view", "Decks"); window.location.reload(false)}}>
+                    <Sidebar.Item className="cursor-pointer" icon={HiViewBoards} onClick={() => {window.localStorage.setItem("view", "Decks"); window.location.reload(false)}}>
                         Decks
                     </Sidebar.Item>
                 </Sidebar.ItemGroup>
                 <Sidebar.ItemGroup>
-                  <Sidebar.Item icon={BiBuoy} onClick={e => Logout(e)}>
+                  <Sidebar.Item className="cursor-pointer" icon={BiBuoy} onClick={e => Logout(e)}>
                         Logout
                     </Sidebar.Item>
                 </Sidebar.ItemGroup>

@@ -34,7 +34,7 @@ function DeckStudy() {
 
     return (
         <>
-        {isFetching ? <div className='flex w-full h-screen justify-center items-center'><Spinner size="xl" className="text-blue-900/50" /></div> :
+        {isFetching ? <div className='flex w-full justify-center items-center'><Spinner size="xl" className="text-blue-900/50" /></div> :
         <div className='flex flex-col h-full w-full p-2.5 m-0'>
             <div className='flex w-full h-3/4 justify-evenly items-center m-0 border-2 rounded-lg cursor-pointer select-none' onClick={() => handleFlipSide()}>
                 {currentFlashcardSide ? 
