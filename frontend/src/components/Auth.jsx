@@ -34,6 +34,7 @@ export function Auth({type, toggle}) {
       };
 
     const handleToggle = () => {
+        clear();
         if(type === "sign up") { toggle("sign in") }
         else { toggle("sign up") }
     }
