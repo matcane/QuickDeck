@@ -18,7 +18,6 @@ export function PopUp({mode}) {
     setIsLoading(true);
     try{
         const response = await deck_add(deckTitle);
-        close();
         window.localStorage.setItem("deck_id", response.id);
         window.localStorage.setItem("deck_title", response.title);
         window.localStorage.setItem("view", "Deck-edit");
