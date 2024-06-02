@@ -8,14 +8,31 @@ export function Auth({type, toggle}) {
     const [password, setPassword] = React.useState('');
     const [isLoading, setIsLoading] = React.useState(false);
     const [isError, setIsError] = React.useState(false);
+    const [isInfo, setIsInfo] = React.useState(false);
     const [errorMessage, setErrorMessage] = React.useState("");
+    const [infoMessage, setInfoMessage] = React.useState({
+      username: 'Username must be at least 4 characters long',
+      password: 'Password must be at least 8 characters long'
+    });
 
     const clear = () => {
         setUsername("");
         setPassword("");
     }
 
+    const isDisabled = () => {
+      if(username.length >=4 && password.length >= 8) {
+        return false;
+      } else {
+        return true;
+      }
+    }
+
     const handleOnSubmit = async () => {
+      if(isDisabled()){
+        setIsInfo(true);
+      } else {
+        setIsInfo(false);
         setIsLoading(true);
         if (type === "sign up") {
             const response = await sign_up(username, password);
@@ -46,12 +63,13 @@ export function Auth({type, toggle}) {
               window.location.reload(false);
             }   
         }
+      }
       };
 
     const handleToggle = () => {
       clear();
-      if(type === "sign up") { setIsError(false); toggle("sign in") }
-      else { setIsError(false); toggle("sign up") }
+      if(type === "sign up") { setIsInfo(false); setIsError(false); toggle("sign in") }
+      else { setIsInfo(false); setIsError(false); toggle("sign up") }
     }
 
   return (
@@ -62,6 +80,7 @@ export function Auth({type, toggle}) {
         </div>
         <TextInput className="text-4xl" size="lg" id="name" type="name" placeholder="username" required shadow value={username} onChange={e => {setIsError(false); setUsername(e.target.value)}} />
         {isError && <Label value={errorMessage} className="text-sm" color="failure" />}
+        {(isInfo && !(username.length >=4)) && <Label value={infoMessage.username} className="text-sm" color="info" />}
       </div>
       <div>
         <div className="mb-2 block">
@@ -69,6 +88,7 @@ export function Auth({type, toggle}) {
         </div>
         <TextInput className="text-4xl" id="password" type="password" placeholder="********" required shadow value={password} onChange={e => {setIsError(false); setPassword(e.target.value)}} />
         {isError && <Label value={errorMessage} className="text-sm" color="failure" />}
+        {(isInfo && !(password.length >=8)) && <Label value={infoMessage.password} className="text-sm" color="info" />}
       </div>
       <div className="flex items-center gap-2">
         <Label htmlFor="agree" className="flex">
