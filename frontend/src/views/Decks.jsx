@@ -15,22 +15,6 @@ function Decks() {
         }
       }, [decks]);
 
-    // function editDeck(deck) {
-    //     window.localStorage.setItem("deck_id", deck.id);
-    //     window.localStorage.setItem("deck_title", deck.title);
-    //     window.localStorage.setItem("view", "Deck-edit");
-    //     window.location.reload(false);
-    // }
-
-    // function studyDeck(deck) {
-    //     if (deck.flashcards.length !== 0) {
-    //         window.localStorage.setItem("deck_id", deck.id);
-    //         window.localStorage.setItem("deck_title", deck.title);
-    //         window.localStorage.setItem("view", "Deck-study");
-    //         window.location.reload(false);
-    //     }
-    // }
-
     return (
         <>
         {isFetching ? <div className='flex w-full justify-center items-center'><Spinner size="xl" className="text-blue-900/50" /></div> :

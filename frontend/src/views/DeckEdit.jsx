@@ -5,6 +5,7 @@ import { flashcard_delete } from '../services/flashcard';
 import { Deck } from '../components/Deck';
 import { Flashcard } from '../components/Flashcard';
 import useFetch from '../hooks/useFetch';
+import useDeck from '../hooks/useDeck';
 
 
 function DeckEdit() {
@@ -16,6 +17,7 @@ function DeckEdit() {
     const [isLoading, setIsLoading] = useState(false);
 
     const { data: deck, setData: setDeck, isFetching } = useFetch(() => deck_detail(deck_id), 'flashcards', true);
+    const { studyDeck } = useDeck()
 
     const addFlashcards = (flashcard) => {
         setDeck([...deck, flashcard]);
@@ -53,19 +55,10 @@ function DeckEdit() {
         setCurrentFlashcardEditIndex(index);
     }
 
-    function studyDeck() {
-        if (deck.length !== 0) {
-            window.localStorage.setItem("deck_id", deck_id);
-            window.localStorage.setItem("deck_title", deckTitle);
-            window.localStorage.setItem("view", "Deck-study");
-            window.location.reload(false);
-        }
-    }
-
     return (
         <div className='flex flex-col h-full w-full'>
             <div className='flex flex-col w-full h-60 justify-evenly items-center md:flex-row'>
-                <Deck edit={showDeckEdit} setEdit={setShowDeckEdit} data={deckTitle} setData={setDeckTitle} id={deck_id} onClick={() => studyDeck()} />
+                <Deck edit={showDeckEdit} setEdit={setShowDeckEdit} data={deckTitle} setData={setDeckTitle} id={deck_id} onClick={() => studyDeck(deck, deck_id, deckTitle)} />
             </div>
             <div className='flex flex-col h-44 justify-center mx-5'>
                 <Flashcard type='create' update={addFlashcards} data="" />

@@ -6,10 +6,10 @@ export default function useDeck() {
         window.location.reload(false);
     }
 
-    function studyDeck(deck) {
-        if (deck.flashcards.length !== 0) {
-            window.localStorage.setItem("deck_id", deck.id);
-            window.localStorage.setItem("deck_title", deck.title);
+    function studyDeck(deck, deck_id=null, deckTitle=null) {
+        if (deck.length !== 0) {
+            window.localStorage.setItem("deck_id", deck_id ? deck_id : deck.id);
+            window.localStorage.setItem("deck_title", deckTitle ? deckTitle : deck.title);
             window.localStorage.setItem("view", "Deck-study");
             window.location.reload(false);
         }
