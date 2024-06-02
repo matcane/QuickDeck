@@ -1,24 +1,14 @@
 import { deck_detail } from '../services/deck';
 import { Spinner } from "flowbite-react";
-import { useState } from 'react';
 import useFetch from '../hooks/useFetch';
+import useFlashcardNavigator from '../hooks/useFlashcardNavigator';
+
 
 function DeckStudy() {
     let deck_id = window.localStorage.getItem("deck_id");
     const { data: deck, isFetching } = useFetch(() => deck_detail(deck_id), 'flashcards');
-    const [currentFlashcard, setCurrentFlashcard] = useState(0);
-    const [currentFlashcardSide, setCurrentFlashcardSide] = useState(true);
-
-
-    const handleNextClick = () => {
-        setCurrentFlashcard((prevIndex) => (prevIndex + 1) % deck.length);
-        setCurrentFlashcardSide(true);
-    };
-
-    const handleFlipSide = () => {
-        setCurrentFlashcardSide(!currentFlashcardSide);
-    }
-
+    const { currentFlashcard, currentFlashcardSide, handleNextClick, handleFlipSide } = useFlashcardNavigator();
+    
     return (
         <>
         {isFetching ? <div className='flex w-full justify-center items-center'><Spinner size="xl" className="text-blue-900/50" /></div> :
@@ -31,7 +21,7 @@ function DeckStudy() {
                     }
             </div>
             <div className='flex w-full h-1/6 justify-evenly items-center m-0 select-none'><h1>{deck.length > 0 && currentFlashcard + 1 + "/" + deck.length}</h1></div>
-            <div className='flex w-full h-1/6 justify-evenly items-center m-0 border-2 rounded-lg cursor-pointer select-none' onClick={() => handleNextClick()}><h1>Next</h1></div>
+            <div className='flex w-full h-1/6 justify-evenly items-center m-0 border-2 rounded-lg cursor-pointer select-none' onClick={() => handleNextClick(deck.length)}><h1>Next</h1></div>
         </div>}
         </>
     )
