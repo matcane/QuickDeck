@@ -6,7 +6,7 @@ export const sign_in = async (username, password) => {
         const response = await api.post("/api/token/", { username: username, password: password , withCredentials: true})
         return response.data;
     } catch (error) {
-        console.log(error);
+        return {name: error.name, message: error.message};
     }
 }
 
@@ -15,7 +15,7 @@ export const sign_up = async (username, password) => {
         const response = await api.post("/api/register/", { username: username, password: password })
         return response.data;
     } catch (error) {
-        console.log(error);
+        return {name: error.name, message: error.message};
     }
 }
 

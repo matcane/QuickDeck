@@ -41,7 +41,7 @@ function DeckEdit() {
         setIsLoading(true);
         try{
             const response = await flashcard_delete(deck_id, flashcard_id);
-            Deck(prevFlashcards => {
+            setDeck(prevFlashcards => {
                 return prevFlashcards.filter(flashcard => flashcard.id !== flashcard_id);
             });
             setIsLoading(false);

@@ -38,12 +38,14 @@ const api = axios.create({
       return response;
     },
     (error) => {
-    if (401 === error.response.status) {
-        window.localStorage.clear();
-        window.location.reload(false);
-    } else {
-        return Promise.reject(error);
-    }
+      switch (error.response.status) {
+        case 400:
+          throw new Error(error.response.data.error);
+        case 401:
+          throw new Error(error.response.data.detail);
+        default:
+          return Promise.reject(error);
+      }
   });
 
 export default api;
