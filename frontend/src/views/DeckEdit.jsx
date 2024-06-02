@@ -36,8 +36,9 @@ function DeckEdit() {
         setShowFlashcardEdit(!showFlashcardEdit);
     };
 
-    const handleDeleteFlashcard = async (e, flashcard_id) => {
+    const handleDeleteFlashcard = async (e, flashcard_id, index) => {
         e.preventDefault();
+        setCurrentFlashcardEditIndex(index);
         setIsLoading(true);
         try{
             const response = await flashcard_delete(deck_id, flashcard_id);
@@ -79,7 +80,7 @@ function DeckEdit() {
                             </div>
                             <div className='flex w-full justify-center md:max-w-60'>
                                 <Button color="lightblue" size="xl" className='w-full bg-blue-500 text-white rounded-lg hover:bg-blue-600 md:max-w-32' type='button' onClick={() => handleEditFlashcard(index)}>Edit</Button>
-                                <Button isProcessing={isLoading} color="lightred" size="xl" className='w-full ml-4 bg-red-500 text-white rounded-lg hover:bg-red-600 md:max-w-32' type='button' onClick={(e) => handleDeleteFlashcard(e, flashcard.id)}>Delete</Button>
+                                <Button isProcessing={(isLoading && (currentFlashcardEditIndex === index))} color="lightred" size="xl" className='w-full ml-4 bg-red-500 text-white rounded-lg hover:bg-red-600 md:max-w-32' type='button' onClick={(e) => handleDeleteFlashcard(e, flashcard.id, index)}>Delete</Button>
                             </div>
                         </div>
                     }
