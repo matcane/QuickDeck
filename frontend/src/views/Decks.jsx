@@ -1,25 +1,17 @@
 import { useState, useEffect } from 'react';
 import { Spinner } from "flowbite-react";
 import { deck_list } from '../services/deck';
+import useFetch from '../hooks/useFetch';
 
 function Decks() {
-    const [decks, setDecks] = useState([]);
-    const [isFetching, setIsFetching] = useState(true);
+    const { data: decks, isFetching } = useFetch(deck_list);
 
     useEffect(() => {
-        fetchDecksData();
-    }, []);
-
-    const fetchDecksData = async () => {
-        try{
-            const response = await deck_list();
-            setDecks(response);
-            setIsFetching(false);
-            if(response.length === 0) {window.localStorage.setItem("view", "Dashboard"); window.location.reload(false)};
-        } catch (error) {
-            console.log(error);
+        if (decks && decks.length === 0) {
+          window.localStorage.setItem("view", "Dashboard");
+          window.location.reload(false);
         }
-    }
+      }, [decks]);
 
     function editDeck(deck) {
         window.localStorage.setItem("deck_id", deck.id);

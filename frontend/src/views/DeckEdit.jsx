@@ -4,38 +4,25 @@ import { deck_detail } from '../services/deck';
 import { flashcard_delete } from '../services/flashcard';
 import { Deck } from '../components/Deck';
 import { Flashcard } from '../components/Flashcard';
+import useFetch from '../hooks/useFetch';
 
 
 function DeckEdit() {
     let deck_id = window.localStorage.getItem("deck_id");
     const [deckTitle, setDeckTitle] = useState(window.localStorage.getItem("deck_title"));
-    const [flashcards, setFlashcards] = useState([]);
     const [currentFlashcardEditIndex, setCurrentFlashcardEditIndex] = useState();
     const [showFlashcardEdit, setShowFlashcardEdit] = useState(false);
     const [showDeckEdit, setShowDeckEdit] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
-    const [isFetching, setIsFetching] = useState(true);
 
-    useEffect(() => {
-        fetchDeckData();
-    }, []);
-
-    const fetchDeckData = async () => {
-        try{
-            const response = await deck_detail(deck_id);
-            setFlashcards(response.flashcards);
-            setIsFetching(false);
-        } catch (error) {
-            console.log(error);
-        }
-    };
+    const { data: deck, setData: setDeck, isFetching } = useFetch(() => deck_detail(deck_id), 'flashcards', true);
 
     const addFlashcards = (flashcard) => {
-        setFlashcards([...flashcards, flashcard]);
+        setDeck([...deck, flashcard]);
     };
 
     const updateFlashcards = (flashcard_edited) => {
-        setFlashcards(prevFlashcards => {
+        setDeck(prevFlashcards => {
             return prevFlashcards.map(flashcard => {
                 if (flashcard.id === flashcard_edited.id) {
                     return { ...flashcard, front: flashcard_edited.front, back: flashcard_edited.back};
@@ -52,7 +39,7 @@ function DeckEdit() {
         setIsLoading(true);
         try{
             const response = await flashcard_delete(deck_id, flashcard_id);
-            setFlashcards(prevFlashcards => {
+            Deck(prevFlashcards => {
                 return prevFlashcards.filter(flashcard => flashcard.id !== flashcard_id);
             });
             setIsLoading(false);
@@ -67,7 +54,7 @@ function DeckEdit() {
     }
 
     function studyDeck() {
-        if (flashcards.length !== 0) {
+        if (deck.length !== 0) {
             window.localStorage.setItem("deck_id", deck_id);
             window.localStorage.setItem("deck_title", deckTitle);
             window.localStorage.setItem("view", "Deck-study");
@@ -86,7 +73,7 @@ function DeckEdit() {
             <div className='flex flex-col overflow-y-auto'>
             {isFetching ? <div className='flex w-full h-screen justify-center items-center'><Spinner size="xl" className="text-blue-900/50" /></div> :
             <>
-            {flashcards.map((flashcard, index) => (
+            {deck.map((flashcard, index) => (
                     <div className='flex flex-row h-auto p-2 m-4 md:p-16 border-2 border-white rounded-lg' key={index}>
                         <div className='w-full h-full'>
                         {showFlashcardEdit && currentFlashcardEditIndex === index ? <Flashcard type='edit' update={updateFlashcards} data={flashcard} /> :
