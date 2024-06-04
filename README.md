@@ -8,7 +8,7 @@
 This application is created to enable users to create and manage decks of flashcards. Flashcards can be used for learning new words, concepts, or any other information users wish to memorize. The project consists of a backend written in Python using the Django framework and Django REST Framework, and a frontend written in JavaScript using the React library. JWT (JSON Web Token) is used for user authentication, while PostgreSQL serves as the database. Tailwind CSS and FlowBite React is employed for styling.
 
 ## Live Demo
-https://9fc8ae32-1dcf-4ec0-9455-0b1e61dd2881.e1-eu-north-azure.choreoapps.dev/
+https://quickdeck.ne.choreoapps.dev
 
 ## Installation and Running Locally
 1. Clone the repository: `git clone https://github.com/matcane/QuickDeck.git`
