@@ -27,9 +27,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', False)
+DEBUG = os.environ.get('DEBUG')
 
-ALLOWED_HOSTS = [os.environ.get("ALLOWED_HOSTS")]
+ALLOWED_HOSTS = [os.environ.get('ALLOWED_HOSTS')]
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -40,18 +40,9 @@ REST_FRAMEWORK = {
     ]
 }
 
-if DEBUG:
-    ALLOWED_HOSTS = ['*']
-    CORS_ALLOWED_ORIGINS = [
-        'http://127.0.0.1:5173',
-        'http://127.0.0.1:4173',
-    ]
-else:
-    ALLOWED_HOSTS = [os.environ.get("ALLOWED_HOSTS")]
-    CORS_ALLOWED_ORIGINS = [os.environ.get("ALLOWED_HOSTS")]
+CSRF_TRUSTED_ORIGINS = [os.environ.get('CSRF_ORIGINS')]
 
-CSRF_TRUSTED_ORIGINS = [os.environ.get("CSRF_TRUSTED_ORIGINS")]
-
+CORS_ALLOWED_ORIGINS = [os.environ.get('CORS_ORIGINS')]
 CORS_ALLOW_CREDENTIALS = True
 
 
@@ -64,6 +55,8 @@ REST_AUTH = {
     'USE_JWT': True,
     'JWT_AUTH_COOKIE': 'access',
     'JWT_AUTH_REFRESH_COOKIE': 'refresh',
+    'JWT_AUTH_SECURE': True,
+    'JWT_AUTH_SAMESITE': 'None',
 }
 
 # Application definition
@@ -165,6 +158,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

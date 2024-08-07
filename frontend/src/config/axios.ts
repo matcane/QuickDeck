@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASEURL = "http://127.0.0.1:8000/api/";
+const BASEURL = "https://quickdeck.up.railway.app/api/";
 
 const api = axios.create({
     baseURL: BASEURL,
